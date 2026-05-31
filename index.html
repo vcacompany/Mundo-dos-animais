@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mundo dos Animais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2563eb;
+      --deep: #1e3a8a;
+      --lime: #a3e635;
+      --light: #eff6ff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Inter", system-ui, sans-serif;
+      --logo: "Caveat", cursive;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--sans); color: var(--text); background: #fff; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); border-bottom: 1px solid #eaf2ff; backdrop-filter: blur(10px); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; color: var(--deep); }
+    .mark { width: 48px; height: 48px; border: 2px solid var(--deep); border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle, #fff, #dbeafe); color: var(--blue); font-size: 25px; }
+    .brand small { display: block; color: var(--blue); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    .brand strong { display: block; font-family: var(--logo); font-size: 26px; line-height: .9; }
+    nav { display: flex; align-items: center; gap: 24px; font-size: 13px; font-weight: 800; color: #334155; }
+    .btn { border: 0; border-radius: 14px; padding: 14px 20px; font: 900 12px var(--sans); text-transform: uppercase; letter-spacing: .05em; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn.blue { background: var(--blue); color: #fff; box-shadow: 0 12px 24px rgba(37,99,235,.22); }
+    .btn.lime { background: var(--lime); color: #172554; }
+    .hero { padding: 76px 0 56px; background: linear-gradient(180deg, #eff6ff 0%, #fff 72%); overflow: hidden; }
+    .grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 46px; align-items: center; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #dbeafe; border-radius: 999px; padding: 8px 14px; background: #f8fbff; color: #172554; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    h1, h2 { margin: 0; color: var(--deep); font-family: var(--serif); line-height: .98; letter-spacing: 0; }
+    h1 { margin-top: 22px; font-size: clamp(42px, 6vw, 72px); }
+    h1 span, h2 span { color: var(--blue); }
+    .lead { max-width: 600px; color: var(--muted); font-size: 17px; line-height: 1.7; margin: 22px 0 28px; }
+    .pet-form { max-width: 520px; display: flex; gap: 10px; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 18px 44px rgba(15,23,42,.12); }
+    .pet-form input { flex: 1; border: 0; outline: 0; padding: 0 14px; font: 500 14px var(--sans); min-height: 48px; }
+    .photo-card { position: relative; border: 5px solid #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 24px 60px rgba(15,23,42,.22); background: #dbeafe; }
+    .photo-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; }
+    .caption { position: absolute; inset: auto 0 0; padding: 22px; color: #fff; background: linear-gradient(0deg, rgba(0,0,0,.78), transparent); }
+    .bar { background: var(--lime); color: #172554; padding: 16px 0; font-size: 14px; font-weight: 800; }
+    .bar .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: center; }
+    section { padding: 74px 0; }
+    .two { display: grid; grid-template-columns: .85fr 1.15fr; gap: 52px; align-items: center; }
+    .section-img { border-radius: 28px; overflow: hidden; border: 5px solid #fff; box-shadow: 0 20px 48px rgba(15,23,42,.16); }
+    .section-img img { width: 100%; height: 430px; object-fit: cover; }
+    h2 { font-size: clamp(32px, 4vw, 48px); margin: 12px 0 18px; }
+    .copy { color: var(--muted); line-height: 1.75; font-size: 15px; }
+    .quote { margin: 20px 0; border-left: 5px solid var(--lime); padding-left: 18px; font-family: var(--serif); font-size: 23px; line-height: 1.25; color: #334155; }
+    .checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 28px 0; color: #334155; font-size: 13px; font-weight: 600; }
+    .checks span::before { content: "✓"; color: var(--blue); font-weight: 900; margin-right: 8px; }
+    .soft { background: #f8fafc; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 34px; }
+    .card { background: #fff; border: 1px solid #edf2f7; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 28px rgba(15,23,42,.08); }
+    .card img { width: 100%; height: 150px; object-fit: cover; }
+    .card div { padding: 18px; }
+    .card h3 { margin: 0 0 8px; font-size: 15px; color: #0f172a; }
+    .card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .center { text-align: center; }
+    .doctor { grid-template-columns: .8fr 1.2fr; }
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
+    .review { padding: 22px; border: 1px solid #edf2f7; border-radius: 20px; background: #f8fafc; min-height: 245px; display: flex; flex-direction: column; gap: 12px; }
+    .review-head { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; }
+    .stars { color: #f59e0b; letter-spacing: 2px; }
+    .review p { color: var(--muted); line-height: 1.65; font-size: 14px; margin: 0; }
+    .map-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 28px; align-items: stretch; }
+    .info { display: grid; gap: 16px; }
+    .info-box { padding: 22px; background: #fff; border: 1px solid #edf2f7; border-radius: 20px; box-shadow: 0 12px 28px rgba(15,23,42,.06); }
+    iframe { width: 100%; min-height: 500px; border: 0; border-radius: 22px; background: #e2e8f0; }
+    footer { background: var(--deep); color: #dbeafe; padding: 48px 0; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 30px; align-items: center; }
+    .float { position: fixed; right: 22px; bottom: 22px; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: #fff; font-size: 26px; box-shadow: 0 16px 40px rgba(0,0,0,.18); z-index: 30; }
+    @media (max-width: 860px) {
+      nav { display: none; }
+      .grid, .two, .doctor, .map-grid { grid-template-columns: 1fr; }
+      .bar .wrap, .cards, .reviews { grid-template-columns: 1fr; }
+      .checks { grid-template-columns: 1fr; }
+      .pet-form { flex-direction: column; }
+      section { padding: 54px 0; }
+      footer .wrap { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#inicio">
+        <span class="mark">🐾</span>
+        <span><small>Clínica Veterinária</small><strong>Mundo dos Animais</strong></span>
+      </a>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#jornada">A Jornada</a>
+        <a href="#especialista">Especialista</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#localizacao">Localização</a>
+      </nav>
+      <a class="btn lime" href="https://wa.me/5512997628140" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="wrap grid">
+        <div>
+          <span class="pill">🐾 Jornada Meu Pet Saudável</span>
+          <h1>Rotina mais <span>saudável</span> para o seu pet.</h1>
+          <p class="lead">Atendimento veterinário em Caraguatatuba com prevenção, cuidado integrativo, nutrição e carinho em cada etapa.</p>
+          <form class="pet-form" id="petForm">
+            <input id="petName" placeholder="Nome do seu melhor amigo">
+            <button class="btn blue" type="submit">Agendar consulta</button>
+          </form>
+        </div>
+        <div class="photo-card">
+          <img src="img1.png" alt="Veterinário da Mundo dos Animais">
+          <div class="caption"><strong>Clínica Mundo dos Animais</strong><br>4.9/5 no atendimento local</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="bar">
+      <div class="wrap">
+        <span>CRMV/SP 12.345</span>
+        <span>Instalações modernas</span>
+        <span>Atendimento com carinho</span>
+      </div>
+    </div>
+
+    <section id="sobre">
+      <div class="wrap two">
+        <div class="section-img"><img src="img2.png" alt="Pet em atendimento"></div>
+        <div>
+          <span class="pill">Amor & Responsabilidade</span>
+          <h2>Seu melhor amigo precisa de <span>prevenção</span>.</h2>
+          <p class="copy">Na Mundo dos Animais, o cuidado volta para ele com acompanhamento próximo, orientação clara e atenção de verdade.</p>
+          <p class="quote">Pequenos cuidados hoje evitam grandes sustos amanhã.</p>
+          <div class="checks">
+            <span>Prevenção de dores e problemas articulares</span>
+            <span>Nutrição ajustada para cada pet</span>
+            <span>Exames para diagnóstico precoce</span>
+            <span>Acompanhamento para pets idosos</span>
+          </div>
+          <a class="btn blue" href="https://wa.me/5512997628140" target="_blank" rel="noopener">Avaliar saúde do meu pet</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="jornada" class="soft">
+      <div class="wrap center">
+        <span class="pill">Para quem é a clínica?</span>
+        <h2>Cuidados para cada fase.</h2>
+        <div class="cards">
+          <article class="card"><img src="img2.png" alt="Pet filhote"><div><h3>Primeiro pet</h3><p>Vacinas, adaptação, alimentação e rotina sem estresse.</p></div></article>
+          <article class="card"><img src="img3.png" alt="Pet saudável"><div><h3>Bem-estar diário</h3><p>Prevenção e orientações para uma vida mais ativa.</p></div></article>
+          <article class="card"><img src="img4.png" alt="Pet em cuidado"><div><h3>Rotina preventiva</h3><p>Atenção para pets adultos, idosos ou com histórico clínico.</p></div></article>
+          <article class="card"><img src="img5.png" alt="Alimentação pet"><div><h3>Nutrição</h3><p>Transição segura para uma alimentação mais saudável.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="especialista">
+      <div class="wrap two doctor">
+        <div class="section-img"><img src="img1.png" alt="Médico veterinário"></div>
+        <div>
+          <span class="pill">Especialista dedicado</span>
+          <h2>Um cuidado próximo, técnico e humano.</h2>
+          <p class="copy">Atendimento integrativo para cães e gatos, unindo clínica, prevenção, nutrição e reabilitação.</p>
+          <p class="quote">Mais conforto, mais saúde e mais tempo bom ao lado do seu pet.</p>
+          <a class="btn blue" href="https://wa.me/5512997628140" target="_blank" rel="noopener">Conversar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="avaliacoes" class="soft">
+      <div class="wrap center">
+        <span class="pill">Google Maps</span>
+        <h2>Avaliações reais.</h2>
+        <div class="reviews">
+          <article class="review">
+            <div class="review-head"><img class="avatar" src="img2.png" alt="Marlene Cardoso"><strong>Marlene Cardoso</strong></div>
+            <div class="stars">★★★★★</div>
+            <p>"Dr Rodrigo Pedro, um ótimo veterinário. A clínica é muito limpa, bem equipada e cuida da minha Yorkshire Luiza com muito carinho."</p>
+            <small>Google Maps · Luiza</small>
+          </article>
+          <article class="review">
+            <div class="review-head"><img class="avatar" src="img3.png" alt="Pamela Caroline"><strong>Pamela Caroline</strong></div>
+            <div class="stars">★★★★★</div>
+            <p>"Excelentes profissionais, entregam a causa e a solução. Atendem com carinho e dedicação, amam o que fazem."</p>
+            <small>Google Maps</small>
+          </article>
+          <article class="review">
+            <div class="review-head"><img class="avatar" src="img1.png" alt="Google Maps"><strong>Mais avaliações</strong></div>
+            <div class="stars">★★★★★</div>
+            <p>Veja outros relatos reais no perfil oficial da clínica no Google Maps.</p>
+            <small><a href="https://www.google.com/maps/place/Cl%C3%ADnica+Veterin%C3%A1ria+Mundo+dos+Animais/@-23.619749,-45.3961274,15z/data=!4m17!1m8!3m7!1s0x94cd639591748b77:0x9cafccb08bc8054b!2sCl%C3%ADnica+Veterin%C3%A1ria+Mundo+dos+Animais!8m2!3d-23.6197778!4d-45.3959211!10e5!16s%2Fg%2F11csqbv7n9!3m7!1s0x94cd639591748b77:0x9cafccb08bc8054b!8m2!3d-23.6197778!4d-45.3959211!9m1!1b1!16s%2Fg%2F11csqbv7n9?entry=ttu" target="_blank" rel="noopener">Abrir perfil →</a></small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="localizacao">
+      <div class="wrap">
+        <div class="center">
+          <span class="pill">📍 Localização</span>
+          <h2>Venha nos visitar.</h2>
+          <p class="copy">Clínica Veterinária Mundo dos Animais - Jardim Forest, Caraguatatuba - SP</p>
+        </div>
+        <div class="map-grid" style="margin-top: 30px;">
+          <div class="info">
+            <div class="info-box">
+              <h3>Endereço oficial</h3>
+              <p class="copy">Abra a rota pelo Google Maps para chegar com facilidade.</p>
+              <a class="btn blue" href="https://www.google.com/maps/place/Cl%C3%ADnica+Veterin%C3%A1ria+Mundo+dos+Animais/@-23.619749,-45.3961274,15z/data=!4m17!1m8!3m7!1s0x94cd639591748b77:0x9cafccb08bc8054b!2sCl%C3%ADnica+Veterin%C3%A1ria+Mundo+dos+Animais!8m2!3d-23.6197778!4d-45.3959211!10e5!16s%2Fg%2F11csqbv7n9!3m7!1s0x94cd639591748b77:0x9cafccb08bc8054b!8m2!3d-23.6197778!4d-45.3959211!9m1!1b1!16s%2Fg%2F11csqbv7n9?entry=ttu" target="_blank" rel="noopener">Traçar rota</a>
+            </div>
+            <div class="info-box">
+              <h3>Contato</h3>
+              <p class="copy">WhatsApp: (12) 99762-8140<br>Email: contato@mundodosanimaisvet.com.br</p>
+              <a class="btn lime" href="https://wa.me/5512997628140" target="_blank" rel="noopener">Conversar online</a>
+            </div>
+          </div>
+          <iframe title="Mapa Clínica Veterinária Mundo dos Animais" loading="lazy" src="https://maps.google.com/maps?q=Cl%C3%ADnica%20Veterin%C3%A1ria%20Mundo%20dos%20Animais%20Caraguatatuba&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="brand"><span class="mark">🐾</span><span><small>Clínica Veterinária</small><strong>Mundo dos Animais</strong></span></div>
+      <p>© 2026 Mundo dos Animais. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <a class="float" href="https://wa.me/5512997628140" target="_blank" rel="noopener" aria-label="WhatsApp">☏</a>
+
+  <script>
+    document.getElementById("petForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("petName").value.trim();
+      const text = name
+        ? `Olá! Gostaria de agendar uma consulta para meu pet chamado ${name}.`
+        : "Olá! Vi o site do Mundo dos Animais e gostaria de agendar uma consulta.";
+      window.open(`https://wa.me/5512997628140?text=${encodeURIComponent(text)}`, "_blank");
+    });
+  </script>
+</body>
+</html>
