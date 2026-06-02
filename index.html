@@ -34,8 +34,11 @@
     .brand strong { display: block; font-family: var(--logo); font-size: 26px; line-height: .9; }
     nav { display: flex; align-items: center; gap: 24px; font-size: 13px; font-weight: 800; color: #334155; }
     .btn { border: 0; border-radius: 14px; padding: 14px 20px; font: 900 12px var(--sans); text-transform: uppercase; letter-spacing: .05em; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn, .card, .review, .info-box, .photo-card, .section-img { transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+    .btn:hover { transform: translateY(-2px); }
     .btn.blue { background: var(--blue); color: #fff; box-shadow: 0 12px 24px rgba(37,99,235,.22); }
     .btn.lime { background: var(--lime); color: #172554; }
+    .btn.instagram { margin-top: 10px; background: linear-gradient(135deg, #f97316, #db2777, #7c3aed); color: #fff; box-shadow: 0 12px 24px rgba(219,39,119,.2); }
     .hero { padding: 76px 0 56px; background: linear-gradient(180deg, #eff6ff 0%, #fff 72%); overflow: hidden; }
     .grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 46px; align-items: center; }
     .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #dbeafe; border-radius: 999px; padding: 8px 14px; background: #f8fbff; color: #172554; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
@@ -46,14 +49,15 @@
     .pet-form { max-width: 520px; display: flex; gap: 10px; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 18px 44px rgba(15,23,42,.12); }
     .pet-form input { flex: 1; border: 0; outline: 0; padding: 0 14px; font: 500 14px var(--sans); min-height: 48px; }
     .photo-card { position: relative; border: 5px solid #fff; border-radius: 28px; overflow: hidden; box-shadow: 0 24px 60px rgba(15,23,42,.22); background: #dbeafe; }
-    .photo-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; }
+    .photo-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; transition: transform .7s ease; }
+    .photo-card:hover img, .section-img:hover img { transform: scale(1.04); }
     .caption { position: absolute; inset: auto 0 0; padding: 22px; color: #fff; background: linear-gradient(0deg, rgba(0,0,0,.78), transparent); }
     .bar { background: var(--lime); color: #172554; padding: 16px 0; font-size: 14px; font-weight: 800; }
     .bar .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: center; }
     section { padding: 74px 0; }
     .two { display: grid; grid-template-columns: .85fr 1.15fr; gap: 52px; align-items: center; }
     .section-img { border-radius: 28px; overflow: hidden; border: 5px solid #fff; box-shadow: 0 20px 48px rgba(15,23,42,.16); }
-    .section-img img { width: 100%; height: 430px; object-fit: cover; }
+    .section-img img { width: 100%; height: 430px; object-fit: cover; transition: transform .7s ease; }
     h2 { font-size: clamp(32px, 4vw, 48px); margin: 12px 0 18px; }
     .copy { color: var(--muted); line-height: 1.75; font-size: 15px; }
     .quote { margin: 20px 0; border-left: 5px solid var(--lime); padding-left: 18px; font-family: var(--serif); font-size: 23px; line-height: 1.25; color: #334155; }
@@ -62,6 +66,7 @@
     .soft { background: #f8fafc; }
     .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 34px; }
     .card { background: #fff; border: 1px solid #edf2f7; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 28px rgba(15,23,42,.08); }
+    .card:hover, .review:hover, .info-box:hover { transform: translateY(-5px); box-shadow: 0 18px 38px rgba(15,23,42,.12); }
     .card img { width: 100%; height: 150px; object-fit: cover; }
     .card div { padding: 18px; }
     .card h3 { margin: 0 0 8px; font-size: 15px; color: #0f172a; }
@@ -81,6 +86,29 @@
     footer { background: var(--deep); color: #dbeafe; padding: 48px 0; }
     footer .wrap { display: flex; justify-content: space-between; gap: 30px; align-items: center; }
     .float { position: fixed; right: 22px; bottom: 22px; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: #fff; font-size: 26px; box-shadow: 0 16px 40px rgba(0,0,0,.18); z-index: 30; }
+    .float { animation: softPulse 2.6s ease-in-out infinite; }
+    .hero .pill, .hero h1, .hero .lead, .pet-form, .photo-card { animation: riseIn .7s ease both; }
+    .hero h1 { animation-delay: .08s; }
+    .hero .lead { animation-delay: .16s; }
+    .pet-form { animation-delay: .24s; }
+    .photo-card { animation-delay: .18s; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; will-change: opacity, transform; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .cards .reveal:nth-child(2), .reviews .reveal:nth-child(2) { transition-delay: .08s; }
+    .cards .reveal:nth-child(3), .reviews .reveal:nth-child(3) { transition-delay: .16s; }
+    .cards .reveal:nth-child(4) { transition-delay: .24s; }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes softPulse {
+      0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 16px 40px rgba(0,0,0,.18); }
+      50% { transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 44px rgba(37,211,102,.32); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
     @media (max-width: 860px) {
       nav { display: none; }
       .grid, .two, .doctor, .map-grid { grid-template-columns: 1fr; }
@@ -137,7 +165,7 @@
       </div>
     </div>
 
-    <section id="sobre">
+    <section id="sobre" class="reveal">
       <div class="wrap two">
         <div class="section-img"><img src="img2.png" alt="Pet em atendimento"></div>
         <div>
@@ -161,15 +189,15 @@
         <span class="pill">Para quem é a clínica?</span>
         <h2>Cuidados para cada fase.</h2>
         <div class="cards">
-          <article class="card"><img src="img2.png" alt="Pet filhote"><div><h3>Primeiro pet</h3><p>Vacinas, adaptação, alimentação e rotina sem estresse.</p></div></article>
-          <article class="card"><img src="img3.png" alt="Pet saudável"><div><h3>Bem-estar diário</h3><p>Prevenção e orientações para uma vida mais ativa.</p></div></article>
-          <article class="card"><img src="img4.png" alt="Pet em cuidado"><div><h3>Rotina preventiva</h3><p>Atenção para pets adultos, idosos ou com histórico clínico.</p></div></article>
-          <article class="card"><img src="img5.png" alt="Alimentação pet"><div><h3>Nutrição</h3><p>Transição segura para uma alimentação mais saudável.</p></div></article>
+          <article class="card reveal"><img src="img2.png" alt="Pet filhote"><div><h3>Primeiro pet</h3><p>Vacinas, adaptação, alimentação e rotina sem estresse.</p></div></article>
+          <article class="card reveal"><img src="img3.png" alt="Pet saudável"><div><h3>Bem-estar diário</h3><p>Prevenção e orientações para uma vida mais ativa.</p></div></article>
+          <article class="card reveal"><img src="img4.png" alt="Pet em cuidado"><div><h3>Rotina preventiva</h3><p>Atenção para pets adultos, idosos ou com histórico clínico.</p></div></article>
+          <article class="card reveal"><img src="img5.png" alt="Alimentação pet"><div><h3>Nutrição</h3><p>Transição segura para uma alimentação mais saudável.</p></div></article>
         </div>
       </div>
     </section>
 
-    <section id="especialista">
+    <section id="especialista" class="reveal">
       <div class="wrap two doctor">
         <div class="section-img"><img src="img1.png" alt="Médico veterinário"></div>
         <div>
@@ -187,19 +215,19 @@
         <span class="pill">Google Maps</span>
         <h2>Avaliações reais.</h2>
         <div class="reviews">
-          <article class="review">
+          <article class="review reveal">
             <div class="review-head"><img class="avatar" src="img2.png" alt="Marlene Cardoso"><strong>Marlene Cardoso</strong></div>
             <div class="stars">★★★★★</div>
             <p>"Dr Rodrigo Pedro, um ótimo veterinário. A clínica é muito limpa, bem equipada e cuida da minha Yorkshire Luiza com muito carinho."</p>
             <small>Google Maps · Luiza</small>
           </article>
-          <article class="review">
+          <article class="review reveal">
             <div class="review-head"><img class="avatar" src="img3.png" alt="Pamela Caroline"><strong>Pamela Caroline</strong></div>
             <div class="stars">★★★★★</div>
             <p>"Excelentes profissionais, entregam a causa e a solução. Atendem com carinho e dedicação, amam o que fazem."</p>
             <small>Google Maps</small>
           </article>
-          <article class="review">
+          <article class="review reveal">
             <div class="review-head"><img class="avatar" src="img1.png" alt="Google Maps"><strong>Mais avaliações</strong></div>
             <div class="stars">★★★★★</div>
             <p>Veja outros relatos reais no perfil oficial da clínica no Google Maps.</p>
@@ -209,7 +237,7 @@
       </div>
     </section>
 
-    <section id="localizacao">
+    <section id="localizacao" class="reveal">
       <div class="wrap">
         <div class="center">
           <span class="pill">📍 Localização</span>
@@ -227,6 +255,7 @@
               <h3>Contato</h3>
               <p class="copy">WhatsApp: (12) 99762-8140<br>Email: contato@mundodosanimaisvet.com.br</p>
               <a class="btn lime" href="https://wa.me/5512997628140" target="_blank" rel="noopener">Conversar online</a>
+              <a class="btn instagram" href="https://www.instagram.com/mundodosanimais/" target="_blank" rel="noopener">Ver Instagram</a>
             </div>
           </div>
           <iframe title="Mapa Clínica Veterinária Mundo dos Animais" loading="lazy" src="https://maps.google.com/maps?q=Cl%C3%ADnica%20Veterin%C3%A1ria%20Mundo%20dos%20Animais%20Caraguatatuba&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe>
@@ -245,6 +274,25 @@
   <a class="float" href="https://wa.me/5512997628140" target="_blank" rel="noopener" aria-label="WhatsApp">☏</a>
 
   <script>
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" })
+      : null;
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      if (observer) {
+        observer.observe(element);
+      } else {
+        element.classList.add("in-view");
+      }
+    });
+
     document.getElementById("petForm").addEventListener("submit", function (event) {
       event.preventDefault();
       const name = document.getElementById("petName").value.trim();
